@@ -1,0 +1,84 @@
+﻿@model IEnumerable<ASM.Models.Customer>
+
+@{
+    ViewData["Title"] = "Danh sách khách hàng";
+}
+
+<h1 class="text-info"><i class="fas fa-th-list"></i> Danh sách khách hàng</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>a*@
+
+<form asp-controller="Customer" asp-action="FindCustomerAll" method="post">
+    <input class="search js-search form-control form-control-rounded mr-sm-2" name="fullName" title="Tìm kiếm tại đây.." placeholder="Tìm kiếm bằng họ tên khách hàng.." aria-label="Search" type="text">
+    <br />
+    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Tìm</button>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Password)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.ConfirmPassword)
+            </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Des)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Password)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.ConfirmPassword)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Des)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CustomerID" class="text-warning"><i class="fas fa-edit"></i></a> |
+                <a asp-action="Details" asp-route-id="@item.CustomerID" class="text-primary"><i class="fas fa-info-circle"></i></a> @*|*@
+                @*<a asp-action="Delete" asp-route-id="@item.CustomerID">Delete</a>*@
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

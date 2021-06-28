@@ -1,0 +1,144 @@
+﻿@using ASM.Models
+@using Microsoft.AspNetCore.Http
+@using Microsoft.AspNetCore.Http.Extensions
+@using ASM.Constants
+
+@model IEnumerable<ASM.Models.ViewModels.ViewCart>;
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+    ViewData["Title"] = "Giỏ hàng";
+}
+
+@{string email = Context.Session.GetString(SessionKey.Customer.Cus_Email);}
+@{string fullName = Context.Session.GetString(SessionKey.Customer.Cus_FullName);}
+
+<style>
+    @*.addProduct {
+        border: 0;
+        font-weight: 700;
+        padding: 9px 5px;
+        background: #ff6a00;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        display: block;
+        width: 186px;
+        margin: 0 auto;
+        color: #ffffff;
+    }
+    .addProduct:hover {
+        background: #ff0000;
+        color: #ffffff;
+    }*@
+</style>
+
+<h1 class="pl-2"><i class="fas fa-shopping-cart"></i> Giỏ Hàng</h1>
+<table class="table">
+    <tr>
+        <th>STT</th>
+        <th>Món ăn</th>
+        <th>Hình ảnh</th>
+        <th>Số lượng</th>
+        <th>Giá</th>
+        <th>Tổng tiền</th>
+        <th></th>
+    </tr>
+    @{
+        int stt = 0;
+        double total = 0;
+        foreach (var item in Model)
+        {
+            int iD = item.Food.FoodID;
+            string txt_Id = "txtQuantity_" + iD;
+            stt++;
+            double totalSub = item.Food.Price * item.Quantity;
+            total += totalSub;
+            <tr id="tr_@iD">
+                <td>@stt</td>
+                <td>@item.Food.Name</td>
+                <td><img src="~/images/food/@item.Food.Image" style="width:150px" /></td>
+                <td><input type="number" id="@txt_Id" min="1" value="@item.Quantity" /></td>
+                <td id="tdPrice_@iD">@item.Food.Price</td>
+                <td id="tdMoney_@iD">@totalSub</td>
+                <td>
+                    <a href="javascript:updateCart(@iD)"><i class="fas fa-edit"></i></a> |
+                    <a href="javascript:deleteCart(@iD)"><i class="fas fa-trash-alt text-danger"></i></a>
+                </td>
+            </tr>
+        }
+    }
+</table>
+<p><div class="ml-3"><b>Tổng tiền:</b> <span id="spTotal">@total <b>VNĐ</b></span></div></p>
+<p class="ml-3">
+    @if (email != null && email != "")
+    {
+        <a class="addProduct btn btn-danger text-white" href="javascript:orderCart(true)" style="text-decoration:none"><i class="fas fa-paper-plane"></i> Mua hàng</a><br><br>
+    }
+    else
+    {
+        <a class="addProduct btn btn-danger text-white" href="javascript:orderCart(false)" style="text-decoration:none"><i class="fas fa-paper-plane"></i> Mua hàng</a>
+        <span class="text-danger">Bạn cần đăng nhập để mua hàng!</span><br><br>
+    }
+    <a asp-action="Index" class="" style="text-decoration:none;"><i class="fas fa-arrow-circle-left"></i> Tiếp tục mua hàng</a>
+</p>
+
+<script>
+    function deleteCart(id) {
+        $.ajax({
+            type: "POST",
+            url: "/Home/DeleteCart",
+            data: {
+                id: id,
+            },
+            success: function (result) {
+                $("#tr_" + id).hide();
+                $("#spTotal").html(result);
+
+                //alert(result);
+                if (result == "0") {
+                    $("#imgCart").attr("src", "/images/cart.png");
+                }
+            }
+        });
+    }
+
+    function updateCart(id) {
+        var quantity = $("#txtQuantity_" + id).val();
+        var price = $("#tdPrice_" + id).html();        
+        if (quantity > 0) {
+            var totalSub = quantity * price;
+        }
+        $("#tdMoney_" + id).html(totalSub);
+
+        $.ajax({            
+            type: "POST",
+            url: "/Home/UpdateCart",
+            data: {
+                id: id,
+                quantity: quantity
+            },
+            success: function (result) {
+                $("#spTotal").html(result);
+                if (result == "0") {
+                    $("#imgCart").attr("src", '/images/cart.png');
+                }
+            }
+        });
+    }
+
+    function orderCart(flagLogin) {
+        if (!flagLogin) {
+            alert("Bạn cần đăng nhập để mua hàng.");
+            return false;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Home/OrderCart",
+            data: {},
+            success: function (result) {
+                window.location = "/Home/History";
+            }
+        });
+    }
+</script>

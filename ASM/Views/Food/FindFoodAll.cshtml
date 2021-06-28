@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ASM.Models.Food>
+
+@{
+    ViewData["Title"] = "Danh sách món ăn";
+}
+
+<h1 class="text-danger"><i class="fas fa-utensils"></i> Món ăn</h1>
+
+<p>
+    <a asp-action="Create" style="text-decoration:none" class="text-info"><i class="fas fa-plus-square"></i> Thêm món ăn</a>
+</p>
+<form asp-controller="Food" asp-action="FindFoodAll" method="post">
+    <input class="search js-search form-control form-control-rounded mr-sm-2" name="nameFood" placeholder="Tìm kiếm bằng tên món.." aria-label="Search" type="text">
+    <br />
+    <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Tìm</button> 
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Classify)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Image)
+            </th>
+            @*<th>
+                    @Html.DisplayNameFor(model => model.Des)
+                </th>*@
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>Hành động</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Classify)
+                </td>
+                <td>
+                    <img src="~/images/food/@item.Image" style="width:150px" />
+                    @*@Html.DisplayFor(modelItem => item.Image)*@
+                </td>
+                @*<td>
+                        @Html.DisplayFor(modelItem => item.Des)
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.FoodID" class="text-warning"><i class="fas fa-edit"></i></a> |
+                    <a asp-action="Details" asp-route-id="@item.FoodID" class="text-primary"><i class="fas fa-info-circle"></i></a> @*|*@
+                    @*<a asp-action="Delete" asp-route-id="@item.FoodID">Delete</a>*@
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

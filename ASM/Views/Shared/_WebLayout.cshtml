@@ -1,0 +1,232 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - SuShi Quán</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">*@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <link href="~/css/site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/login.css" />
+    <link rel="stylesheet" href="~/css/WebLayout.css" />
+    <link rel="stylesheet" href="~/css/product.css" />
+    @*<link rel="stylesheet" href="~/css/load.css" />*@
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        h1 {
+            background-color: lightgreen;
+            color: orangered;
+        }
+
+        .h1 {
+            background-color: black;
+            opacity: 0.4;
+            color: white;
+        }
+    </style>
+</head>
+<body class="preloading">
+    <!--<header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">SuShi Quán</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <partial name="_WebLoginPartial" />-->
+    @*<ul class="navbar-nav flex-grow-1">
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">SuShi Quán</a>
+            </li>
+        </ul>*@
+    <!--</div>
+        </nav>
+    </header>
+    <main role="main" class="pb-3">-->
+    @*@RenderBody()*@
+    <!--</main>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - Quán ăn - <a asp-area="" asp-controller="Home" asp-action="Index">Shushi Quán</a>
+        </div>
+    </footer>-->
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+        @RenderSection("Scripts", required: false)*@
+    @*<div class="loader">
+        <span class="fas fa-spinner xoay icon"></span>
+    </div>*@
+        <header role="banner">
+            <nav class="navbar navbar-expand-md navbar-light bg-success absolute-top">
+                <div class="container-fluid">
+
+                    <button class="navbar-toggler order-2 order-md-1" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbar">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index" style="text-decoration:none;width: 116px;"><i class="fas fa-home"></i> Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Foods" style="text-decoration:none;width: 96px;"><i class="fas fa-utensils"></i> Món ăn</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Combos" style="text-decoration:none">Combo</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-white" asp-controller="Home" asp-action="Waters" style="text-decoration:none;width: 106px;"><i class="fas fa-wine-bottle"></i> Đồ uống</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <a class="navbar-brand mx-auto" asp-controller="Home" asp-action="Index"><img src="~/images/food/logosushi.jpg" class="text-center m-auto" style="width:80px;" /></a>
+
+                    <div class="collapse navbar-collapse justify-content-end" id="navbar">
+                        <form class="form-inline" role="search" asp-controller="Home" asp-action="FindFoodAll" method="post">
+                            <input class="search js-search form-control form-control-rounded mr-sm-2" name="nameFood" title="Tìm kiếm tại đây.." placeholder="Tìm kiếm bằng tên món.." aria-label="Search" type="text">
+                            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit"><i class="fas fa-search"></i> Tìm</button>
+                        </form>
+                        <partial name="_WebLoginPartial" />
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div class="masthead">
+            <!-- for Responsive Viewport (Insert Carousel or other item for "cover" effect)  -->
+            <!-- Carousel container -->
+            <div id="suds-carousel" class="carousel slide fade-carousel" data-ride="carousel">
+
+                <!-- Indicators -->
+                <ol class="carousel-indicators">
+                    <li data-target="#suds-carousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#suds-carousel" data-slide-to="1"></li>
+                    <li data-target="#suds-carousel" data-slide-to="2"></li>
+                </ol>
+                <!-- Content -->
+                <div class="carousel-inner carousel-zoom" role="listbox">
+                    <!-- Slide 1 -->
+                    <div class="carousel-item active">
+                        <div class="slide-1"></div>
+                        <div class="carousel-caption">
+                            <hgroup>
+                                <h2 class="h1">SuShi cơm cuộn</h2>
+                                <h4><small>Nguyên liệu chính để làm nên món ngon này là cơm trộn giấm kết hợp với hải sản tươi sống, rau củ quả, rong biển.</small></h4>
+                            </hgroup>
+                        </div>
+                    </div>
+                    <!-- Slide 2 -->
+                    <div class="carousel-item">
+                        <div class="slide-2"></div>
+                        <div class="carousel-caption">
+                            <hgroup>
+                                <h2 class="h1">SuShi cá hồi</h2>
+                                <h4><small>SuShi cá hồi được cắt thành từng lát mỏng có chiều rộng khoảng 2.5 cm, chiều dài 4 cm và dày chừng 0.5 cm, nhưng kích cỡ có thể khác nhau tuỳ vào loại nguyên liệu và người đầu bếp.</small></h4>
+                            </hgroup>
+                        </div>
+                    </div>
+                    <!-- Slide 3 -->
+                    <div class="carousel-item">
+                        <div class="carousel-caption">
+                            <hgroup>
+                                <h2 class="h1">Wow, Combo SuShi!</h2>
+                                <h4><small>Khi bạn mua SuShi cơm cuộn bạn sẽ được tặng thêm SuShi cá hồi. Ôi! thật là hấp dẫn, đặt ngay 1 suất nào cả nhà ơi!.</small></h4>
+                            </hgroup>
+                        </div>
+                        <div class="slide-3"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+        <div class="site-newsletter">
+            <div class="container">
+                <div class="text-center mb-2">
+                    <h3 class="h3 mb-2 text-primary">
+                        SuShi Quán
+                    </h3>
+                    <p class="text-muted">Chúng tôi tự hào với hơn 10 năm kinh nghiệm làm sushi cho hơn 100.000 du khách!.</p>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/jBiec5lRp0A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+        </div>
+        <div class="site-instagram">
+            <div class="action">
+                <a class="btn btn-danger" href="#">
+                    Theo dõi chúng tôi trên Instagram
+                </a>
+            </div>
+            <div class="row no-gutters">
+                <div class="col-sm-6">
+                    <div class="row no-gutters">
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/bigShushi.jpg" style="height:120px;" alt="">
+                        </div>
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/comCuon.jpg" style="height:120px;" alt="">
+                        </div>
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/shushi.jpg" style="height:120px;" alt="">
+                        </div>
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/shushicombo.jpg" style="height:120px;" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="row no-gutters">
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/shushicombo1.jpg" style="height:120px;" alt="">
+                        </div>
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/shushicombo.jpg" style="height:120px;" alt="">
+                        </div>
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/monan.jpg" style="height:120px;" alt="">
+                        </div>
+                        <div class="col-3 photo">
+                            <img class="img-fluid" src="~/images/food/comboshushi.jpg" style="height:120px;" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="site-footer bg-darkest" role="contentinfo">
+            <div class="container">
+
+                <ul class="nav justify-content-center">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Foods">Món ăn</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Combos">Combo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Waters">Đồ uống</a>
+                    </li>
+                </ul>
+                <div class="copy">
+                    &copy; 2021 - Quán ăn - <a asp-area="" asp-controller="Home" asp-action="Index">Shushi Quán</a> - Đã đăng ký bản quyền
+                </div>
+            </div>
+        </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script type="text/javascript" src="js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="js/script.js"></script>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

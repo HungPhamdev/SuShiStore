@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ASM.Models.Food>
+@{
+    Layout = "~/Views/Shared/_WebLayout.cshtml";
+    ViewData["Title"] = "Trang chủ";
+}
+
+<style>
+    .list-product {
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .product {
+        margin-top: 10px;
+        margin-right: 10px;
+        width: 205px;
+    }
+
+    .img {
+        width: 150px;
+        height: 150px;
+        margin: auto;
+    }
+
+    .title {
+        color: #0e0e0e;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .field-price {
+        font-size: 24px;
+        color: #d50000;
+        margin-bottom: 15px;
+        font-weight: 700;
+        text-align: center;
+    }
+
+    .viewProduct, .addProduct {
+        border: 0;
+        font-weight: 700;
+        padding: 9px 5px;
+        background: #ffd800;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        margin: 0 auto;
+        color: #0e0e0e;
+    }
+    .addProduct:hover{
+        background-color:cyan;
+    }
+@*
+    .addProduct {
+        margin-left: 2px;
+    }*@
+</style>
+
+<div class="text-center">
+    <p class="display-4 h2 mt-2 font-weight-bold text-warning">Sushi Quán<br /> Kính chào quý khách!</p>
+</div>
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                <div class="box card">
+                    <div class="box cardImg">
+                        <img src="~/images/food/@item.Image" />
+                    </div>
+                    <div class="info">
+                        <span class="title">@item.Name</span>
+                        <div class="field-price">@item.Price</div>
+                        <a class="addProduct" href="javascript:addCart(@item.FoodID);" style="text-decoration:none">
+                            <i class="fas fa-cart-plus"></i> Thêm <img id="imgBusy_@item.FoodID" src="~/images/busy.gif" style="display:none" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script>
+    function addCart(id) {
+        $("#imgCart").attr("src", '/images/cartA.png');
+        $("#imgBusy_" + id).show();
+        setTimeout(function () {
+            $.ajax({
+                url: "/Home/AddCart?Id=" + id,
+                type: "Post",
+                success: function (result) {
+                    //alert(result);
+                },
+                error: function (e) {
+                    alert(this.url);
+                }
+            });
+            $("#imgBusy_" + id).hide();
+        }, 500);
+    }
+</script>
